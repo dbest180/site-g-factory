@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My SSG Site</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Mobile header with hamburger -->
+    <div class="mobile-header">
+        <label for="menu-toggle" class="hamburger">☰</label>
+        <span class="site-title">My SSG</span>
+    </div>
+
+    <!-- Hidden checkbox toggles sidebar on mobile -->
+    <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            {{nav}}
+        </nav>
+    </aside>
+
+    <!-- Main content area -->
+    <main class="content">
+        <!-- Hero section -->
+        <div class="hero">
+            <h1>Welcome to My Site</h1>
+            <p>This is a lightweight static site generated with Python.</p>
+        </div>
+
+        <!-- Page content injected here -->
+        {{content}}
+    </main>
+</body>
+</html>
