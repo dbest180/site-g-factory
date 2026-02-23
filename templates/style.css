@@ -127,3 +127,27 @@ body {
         padding: 2rem;
     }
 }
+
+.page-list {
+    list-style: none;
+    padding: 0;
+}
+
+.page-list li {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.page-list a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.page-list a:hover {
+    color: #3498db;
+}
