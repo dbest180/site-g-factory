@@ -58,6 +58,7 @@ for page in pages:
     link = f"{page['basename']}.html"
     nav_items.append(f'<li><a href="{link}">{page["title"]}</a></li>')
 nav_html = "<ul>\n" + "\n".join(nav_items) + "\n</ul>"
+nav_html = '<ul>\n<li><a href="index.html">🏠 Home</a></li>\n' + "\n".join(nav_items) + "\n</ul>"
 
 # Process each markdown file
 for md_file in markdown_files:
