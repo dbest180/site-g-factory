@@ -79,4 +79,22 @@ for md_file in markdown_files:
 
 print(f"✅ Generated {len(markdown_files)} page(s) in {OUTPUT_DIR}/")
 
+# Build index.html
+index_items = "\n".join(
+    f'<li><a href="{p["basename"]}.html">{p["title"]}</a></li>'
+    for p in pages
+)
+
+index_html = layout_template.replace("{{nav}}", nav_html).replace("{{content}}", f"""
+<h2>Stories</h2>
+<ul class="page-list">
+{index_items}
+</ul>
+""")
+
+with open(os.path.join(OUTPUT_DIR, "index.html"), "w", encoding="utf-8") as f:
+    f.write(index_html)
+
+print("✅ Generated index.html")
+
 shutil.copy("templates/style.css", os.path.join(OUTPUT_DIR, "style.css"))
