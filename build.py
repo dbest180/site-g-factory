@@ -10,7 +10,6 @@ Static Site Generator
 import os
 import markdown
 import shutil
-shutil.copy("templates/style.css", os.path.join(OUTPUT_DIR, "style.css"))
 from pathlib import Path
 
 # Configuration
@@ -79,3 +78,5 @@ for md_file in markdown_files:
         f.write(page_html)
 
 print(f"✅ Generated {len(markdown_files)} page(s) in {OUTPUT_DIR}/")
+
+shutil.copy("templates/style.css", os.path.join(OUTPUT_DIR, "style.css"))
