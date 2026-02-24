@@ -15,7 +15,7 @@ from pathlib import Path
 # Configuration
 CONTENT_DIR = "content"
 TEMPLATE_DIR = "templates"
-OUTPUT_DIR = "dist"
+OUTPUT_DIR = "docs"
 LAYOUT_FILE = "layout.html"
 
 # Ensure output directory exists
