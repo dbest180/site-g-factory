@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 Static Site Generator
 - Reads Markdown files from content/
