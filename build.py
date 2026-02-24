@@ -69,8 +69,9 @@ for md_file in markdown_files:
     html_content = markdown.markdown(md_content, extensions=['extra'])
 
     # Replace placeholders in layout
-    page_html = layout_template.replace("{{nav}}", nav_html)
-    page_html = page_html.replace("{{content}}", html_content)
+page_html = layout_template.replace("{{nav}}", nav_html)
+page_html = page_html.replace("{{content}}", html_content)
+page_html = page_html.replace("{{title}}", title)
 
     # Output file
     out_filename = f"{md_file.stem}.html"
