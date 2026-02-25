@@ -4,7 +4,7 @@ Static Site Generator
 - Reads Markdown files from content/
 - Renders them using templates/layout.html
 - Injects generated navigation list into {{nav}}
-- Outputs HTML to dist/
+- Outputs HTML to docs/
 """
 
 import os
@@ -33,8 +33,10 @@ pages = []
 for md_file in markdown_files:
     with open(md_file, "r", encoding="utf-8") as f:
         content = f.read()
-    # Extract title from first # heading, or use filename
+
     lines = content.splitlines()
+
+    # Extract title from first # heading, or use filename
     title = None
     for line in lines:
         if line.startswith("# "):
@@ -43,6 +45,7 @@ for md_file in markdown_files:
     if not title:
         title = md_file.stem.replace("-", " ").title()
 
+    # Extract hero image if specified
     hero = None
     for line in lines:
         if line.startswith("hero:"):
@@ -56,18 +59,14 @@ for md_file in markdown_files:
         "hero": hero
     })
 
-    
-
-# Sort pages alphabetically by title (optional)
+# Sort pages alphabetically by title
 pages.sort(key=lambda p: p["title"])
 
-# Build the navigation HTML (<ul> list)
+# Build the navigation HTML
 nav_items = []
 for page in pages:
-    # Link to the generated HTML file (same name, .html)
     link = f"{page['basename']}.html"
     nav_items.append(f'<li><a href="{link}">{page["title"]}</a></li>')
-nav_html = "<ul>\n" + "\n".join(nav_items) + "\n</ul>"
 nav_html = '<ul>\n<li><a href="index.html">🏠 Home</a></li>\n' + "\n".join(nav_items) + "\n</ul>"
 
 # Process each markdown file
@@ -78,12 +77,18 @@ for md_file in markdown_files:
     # Convert markdown to HTML
     html_content = markdown.markdown(md_content, extensions=['extra'])
 
+    # Get this page's data
+    page_data = next((p for p in pages if p["basename"] == md_file.stem), None)
+    title = page_data["title"] if page_data else md_file.stem
+    hero = page_data["hero"] if page_data else None
 
-    hero = next((p["hero"] for p in pages if p["basename"] == md_file.stem), None)
-if hero:
-    hero_html = f'<div class="page-hero"><img src="../assets/images/{hero}" alt=""></div>'
-else:
-    hero_html = ''
+    # Build hero image HTML
+    if hero:
+        hero_html = f'<div class="page-hero"><img src="assets/images/{hero}" alt="{title}"></div>'
+    else:
+        hero_html = ''
+
+    # Replace placeholders in layout
     page_html = layout_template.replace("{{nav}}", nav_html)
     page_html = page_html.replace("{{hero}}", hero_html)
     page_html = page_html.replace("{{content}}", html_content)
@@ -103,7 +108,10 @@ index_items = "\n".join(
     for p in pages
 )
 
-index_html = layout_template.replace("{{nav}}", nav_html).replace("{{content}}", f"""
+index_html = layout_template.replace("{{nav}}", nav_html)
+index_html = index_html.replace("{{hero}}", "")
+index_html = index_html.replace("{{title}}", "Home")
+index_html = index_html.replace("{{content}}", f"""
 <h2>Stories</h2>
 <ul class="page-list">
 {index_items}
@@ -115,5 +123,8 @@ with open(os.path.join(OUTPUT_DIR, "index.html"), "w", encoding="utf-8") as f:
 
 print("✅ Generated index.html")
 
+# Copy static assets
 shutil.copy("templates/style.css", os.path.join(OUTPUT_DIR, "style.css"))
 shutil.copytree("assets", os.path.join(OUTPUT_DIR, "assets"), dirs_exist_ok=True)
+
+print("✅ Copied assets")
