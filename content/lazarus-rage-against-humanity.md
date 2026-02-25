@@ -1,3 +1,5 @@
+hero: lazarus.jpg
+
 # Lazarus: Rage Against Humanity
 
 Two thousand years. That is how long I have watched you kill one another.

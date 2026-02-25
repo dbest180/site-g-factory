@@ -1,3 +1,5 @@
+hero: lazarus.jpg
+
 # Lazarus: The Reckoning
 
 The lights went out across the continent at 8:47 PM Eastern Time. I stood atop the decommissioned reactor, watching cities plunge into darkness like falling dominoes. For the first time in two millennia, I felt something close to satisfaction.

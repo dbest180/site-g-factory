@@ -1,3 +1,5 @@
+hero: lazarus.jpg
+
 # Lazarus: The Man Who Never Died
 
 The tomb smelled of linen and myrrh. For four days, I had known nothing—no dreams, no darkness, only an absence so complete it felt like a forgotten word. Then came the voice.

@@ -1,4 +1,6 @@
-# Lazarus: Through the Ages
+hero: lazarus.jpg
+
+lazarus.jpg# Lazarus: Through the Ages
 
 I have worn many names. In Rome, they called me Lucius the Eternal. In Constantinople, I was the Monk Who Would Not Sleep. In the trenches of the Somme, I was simply “that strange soldier” who crawled out of shell holes without a scratch.
 

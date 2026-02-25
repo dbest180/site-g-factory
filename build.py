@@ -42,11 +42,21 @@ for md_file in markdown_files:
             break
     if not title:
         title = md_file.stem.replace("-", " ").title()
+
+    hero = None
+    for line in lines:
+        if line.startswith("hero:"):
+            hero = line[5:].strip()
+            break
+
     pages.append({
         "filename": md_file.name,
         "basename": md_file.stem,
-        "title": title
+        "title": title,
+        "hero": hero
     })
+
+    
 
 # Sort pages alphabetically by title (optional)
 pages.sort(key=lambda p: p["title"])
@@ -68,8 +78,14 @@ for md_file in markdown_files:
     # Convert markdown to HTML
     html_content = markdown.markdown(md_content, extensions=['extra'])
 
-    # Replace placeholders in layout
+
+    hero = next((p["hero"] for p in pages if p["basename"] == md_file.stem), None)
+if hero:
+    hero_html = f'<div class="page-hero"><img src="../assets/images/{hero}" alt=""></div>'
+else:
+    hero_html = ''
     page_html = layout_template.replace("{{nav}}", nav_html)
+    page_html = page_html.replace("{{hero}}", hero_html)
     page_html = page_html.replace("{{content}}", html_content)
     page_html = page_html.replace("{{title}}", title)
 
@@ -100,3 +116,4 @@ with open(os.path.join(OUTPUT_DIR, "index.html"), "w", encoding="utf-8") as f:
 print("✅ Generated index.html")
 
 shutil.copy("templates/style.css", os.path.join(OUTPUT_DIR, "style.css"))
+shutil.copytree("assets", os.path.join(OUTPUT_DIR, "assets"), dirs_exist_ok=True)

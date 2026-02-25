@@ -1,3 +1,5 @@
+hero: lazarus.jpg
+
 # Lazarus: The Healer Who Walked Unbound
 
 I have met gods, or what mortals call gods. I have stood in temples where emperors were worshiped and watched their statues crumble. But I met only one being who made me question whether I had glimpsed the divine—and he was not named in any scripture I knew.
